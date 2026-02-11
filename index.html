@@ -197,7 +197,7 @@
 
       <!-- Audio Pronunciation Button -->
       <button id="playAudio">🔊 Play Pronunciation</button>
-      <audio id="audioClip" src="2df32b96-f5b1-4afe-90da-e5bcad7e8a3c.mp3"></audio>
+      <audio id="audioClip" src="2df32b96-f5b1-4afe-90da-e5bcad7e8a3c.mp3" preload="auto"></audio>
     </header>
 
     <!-- ENGLISH -->
@@ -357,21 +357,28 @@
     // Audio Button Script
     const audio = document.getElementById('audioClip');
     const btn = document.getElementById('playAudio');
+    let isPlaying = false;
 
     btn.addEventListener('click', () => {
-      if (audio.paused) {
-        audio.play().catch(err => {
+      if (!isPlaying) {
+        audio.play().then(() => {
+          isPlaying = true;
+          btn.textContent = "⏸️ Pause Pronunciation";
+        }).catch(err => {
           console.error("Audio failed to play:", err);
-          alert("Cannot play audio. Check the file path or browser settings.");
+          alert("Cannot play audio. Make sure the file exists and is accessible.");
+          isPlaying = false;
+          btn.textContent = "🔊 Play Pronunciation";
         });
-        btn.textContent = "⏸️ Pause Pronunciation";
       } else {
         audio.pause();
+        isPlaying = false;
         btn.textContent = "🔊 Play Pronunciation";
       }
     });
 
     audio.addEventListener('ended', () => {
+      isPlaying = false;
       btn.textContent = "🔊 Play Pronunciation";
     });
   </script>
