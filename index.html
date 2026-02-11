@@ -74,6 +74,7 @@
       margin-bottom: 40px;
     }
 
+    /* Cool professional logo style */
     .logo-mark {
       display: inline-flex;
       align-items: center;
@@ -118,23 +119,6 @@
       margin-top: 6px;
       font-style: italic;
       color: var(--muted);
-    }
-
-    /* Audio Button Style */
-    #playAudio {
-      margin-top: 8px;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      border-radius: 999px;
-      padding: 6px 12px;
-      cursor: pointer;
-      font-size: 0.85rem;
-      transition: background 0.3s;
-    }
-
-    #playAudio:hover {
-      background: #7e57c2;
     }
 
     .badge {
@@ -194,10 +178,6 @@
         <span class="badge">noun</span>
       </h1>
       <p class="pronunciation">/had͡ʑu.ba.d͡ʑun.d͡ʑa/</p>
-
-      <!-- Audio Pronunciation Button -->
-      <button id="playAudio">🔊 Play Pronunciation</button>
-      <audio id="audioClip" src="2df32b96-f5b1-4afe-90da-e5bcad7e8a3c.mp3" preload="auto"></audio>
     </header>
 
     <!-- ENGLISH -->
@@ -289,7 +269,7 @@
         <ul>
           <li>„Nie bądź hadziubadziundzia.”</li>
           <li>„Ale z ciebie hadziubadziundzia.”</li>
-          <li>„Przestań się tak zachowywać, hadziubadziundzia.”</li>
+          <li>„Przestań się tak zachowywać, hadziubadziundzia.”li>
         </ul>
       </section>
 
@@ -353,34 +333,6 @@
 
     const savedLang = localStorage.getItem("lang") || "en";
     setLang(savedLang);
-
-    // Audio Button Script
-    const audio = document.getElementById('audioClip');
-    const btn = document.getElementById('playAudio');
-    let isPlaying = false;
-
-    btn.addEventListener('click', () => {
-      if (!isPlaying) {
-        audio.play().then(() => {
-          isPlaying = true;
-          btn.textContent = "⏸️ Pause Pronunciation";
-        }).catch(err => {
-          console.error("Audio failed to play:", err);
-          alert("Cannot play audio. Make sure the file exists and is accessible.");
-          isPlaying = false;
-          btn.textContent = "🔊 Play Pronunciation";
-        });
-      } else {
-        audio.pause();
-        isPlaying = false;
-        btn.textContent = "🔊 Play Pronunciation";
-      }
-    });
-
-    audio.addEventListener('ended', () => {
-      isPlaying = false;
-      btn.textContent = "🔊 Play Pronunciation";
-    });
   </script>
 </body>
 </html>
